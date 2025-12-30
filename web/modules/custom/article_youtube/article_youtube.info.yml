@@ -1,0 +1,8 @@
+name: 'Article YouTube'
+type: module
+description: 'Thêm trường link YouTube cho Article và hiển thị video embed.'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - drupal:node
+  - drupal:link

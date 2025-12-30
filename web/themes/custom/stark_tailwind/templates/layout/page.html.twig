@@ -1,0 +1,107 @@
+{#
+  Default page layout with responsive header, navigation, and footer using Tailwind.
+#}
+<div class="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
+  <header class="sticky top-0 z-10 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <div class="page-shell flex items-center justify-between gap-4 py-4">
+      <div class="flex items-center gap-3">
+        {% if site_logo %}
+          <a href="{{ front_page }}" rel="home" class="shrink-0">
+            <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" class="h-10 w-auto">
+          </a>
+        {% endif %}
+        <div class="flex flex-col">
+          {% if site_name %}
+            <a href="{{ front_page }}" rel="home" class="text-lg font-semibold hover:text-slate-700">
+              {{ site_name }}
+            </a>
+          {% endif %}
+          {% if site_slogan %}
+            <p class="text-sm text-slate-500">{{ site_slogan }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if page.primary_menu %}
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+          {{ page.primary_menu }}
+        </nav>
+        <details class="md:hidden relative">
+          <summary class="flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm cursor-pointer">
+            {{ 'Menu'|t }}
+          </summary>
+          <div class="absolute right-0 mt-2 w-52 rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
+            {{ page.primary_menu }}
+          </div>
+        </details>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if messages %}
+    <div class="page-shell w-full py-4">
+      <div class="card">
+        {{ messages }}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if page.highlighted %}
+    <div class="page-shell w-full py-4">
+      <div class="card">
+        {{ page.highlighted }}
+      </div>
+    </div>
+  {% endif %}
+
+  <main class="flex-1">
+    <div class="page-shell py-10 space-y-6">
+      {% if page.breadcrumb %}
+        <div class="text-sm text-slate-500">
+          {{ page.breadcrumb }}
+        </div>
+      {% endif %}
+
+      {% if page.help %}
+        <div class="card">
+          {{ page.help }}
+        </div>
+      {% endif %}
+
+      <div class="grid gap-6 lg:grid-cols-12">
+        <div class="lg:col-span-8 space-y-6">
+          <a id="main-content" tabindex="-1"></a>
+          <div class="card">
+            {{ page.content }}
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 space-y-6">
+          {% if page.sidebar_first %}
+            <div class="card">
+              <h2 class="text-lg font-semibold text-slate-900 mb-2">{{ 'Sidebar'|t }}</h2>
+              {{ page.sidebar_first }}
+            </div>
+          {% endif %}
+          {% if page.sidebar_second %}
+            <div class="card">
+              <h2 class="text-lg font-semibold text-slate-900 mb-2">{{ 'Additional'|t }}</h2>
+              {{ page.sidebar_second }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% if page.footer %}
+    <footer class="border-t border-slate-200 bg-white">
+      <div class="page-shell py-8 text-sm text-slate-600 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="font-semibold text-slate-800">{{ 'Footer'|t }}</div>
+        <div class="flex flex-wrap gap-4">
+          {{ page.footer }}
+        </div>
+      </div>
+    </footer>
+  {% endif %}
+</div>

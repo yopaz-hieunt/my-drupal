@@ -4,6 +4,7 @@
 /web/modules/contrib/
 /web/themes/contrib/
 /web/profiles/contrib/
+**/node_modules/
 
 # Site files (uploaded)
 web/sites/*/files/

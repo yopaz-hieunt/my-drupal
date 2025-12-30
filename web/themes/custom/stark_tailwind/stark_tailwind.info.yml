@@ -1,0 +1,20 @@
+name: 'Stark Tailwind'
+type: theme
+description: 'Stark-based custom theme with Tailwind CSS utilities.'
+package: Custom
+base theme: stark
+core_version_requirement: ^11
+libraries:
+  - stark_tailwind/global-styling
+regions:
+  header: Header
+  primary_menu: Primary menu
+  secondary_menu: Secondary menu
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: First sidebar
+  sidebar_second: Second sidebar
+  footer: Footer
+  page_top: Page top
+  page_bottom: Page bottom

@@ -1,0 +1,133 @@
+{#
+  Front page layout with Tailwind utility classes.
+
+  Renders primary Drupal regions with a simple hero and content shell.
+#}
+<div class="min-h-screen bg-slate-50 text-slate-900 flex flex-col">
+  <header class="sticky top-0 z-10 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <div class="page-shell flex items-center justify-between gap-6 py-4">
+      <div class="flex items-center gap-3">
+        {% if site_logo %}
+          <a href="{{ front_page }}" rel="home" class="shrink-0">
+            <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" class="h-10 w-auto">
+          </a>
+        {% endif %}
+        <div class="flex flex-col">
+          {% if site_name %}
+            <a href="{{ front_page }}" rel="home" class="text-lg font-semibold hover:text-slate-700">
+              {{ site_name }}
+            </a>
+          {% endif %}
+          {% if site_slogan %}
+            <p class="text-sm text-slate-500">{{ site_slogan }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% if page.primary_menu %}
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+          {{ page.primary_menu }}
+        </nav>
+      {% endif %}
+      <div class="flex items-center gap-3">
+        <a href="{{ path('user.login') }}" class="rounded-full border border-slate-200 bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-800 shadow-sm hover:border-slate-300">
+          {{ 'Login'|t }}
+        </a>
+      </div>
+    </div>
+  </header>
+
+  {% if messages %}
+    <div class="page-shell w-full py-4">
+      <div class="card">
+        {{ messages }}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if page.highlighted %}
+    <div class="page-shell w-full py-4">
+      <div class="card">
+        {{ page.highlighted }}
+      </div>
+    </div>
+  {% endif %}
+
+  <main class="flex-1">
+    <section class="page-shell py-16 grid gap-12 lg:grid-cols-2 items-center">
+      <div class="space-y-6">
+        <p class="text-sm font-semibold text-indigo-600">{{ 'Welcome'|t }}</p>
+        <h1 class="text-4xl font-bold tracking-tight text-slate-900">
+          {{ 'Build a clean Drupal front page with Tailwind.'|t }}
+        </h1>
+        <p class="text-lg text-slate-600">
+          {{ 'Use Stark Tailwind as a minimal base and layer on utility classes for quick layout, typography, and spacing.'|t }}
+        </p>
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="{{ path('<front>') }}" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-slate-800">
+            {{ 'Explore content'|t }}
+          </a>
+          <a href="{{ path('node.add', {'node_type': 'article'}) }}" class="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-white">
+            {{ 'Create article'|t }}
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="space-y-4">
+          <h2 class="text-xl font-semibold text-slate-900">{{ 'Highlights'|t }}</h2>
+          <p class="text-slate-600">
+            {{ 'Swap in your own blocks or view modes here. The card styling keeps things tidy while you iterate.'|t }}
+          </p>
+          {% if page.secondary_menu %}
+            <div class="space-y-2">
+              <div class="text-sm font-semibold text-slate-700">{{ 'Secondary navigation'|t }}</div>
+              {{ page.secondary_menu }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white border-t border-slate-200">
+      <div class="page-shell py-12 space-y-8">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm font-semibold text-indigo-600">{{ 'Front page content'|t }}</p>
+            <h2 class="text-2xl font-bold text-slate-900">{{ 'Latest updates'|t }}</h2>
+          </div>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="card">
+            {{ page.content }}
+          </div>
+          {% if page.sidebar_first or page.sidebar_second %}
+            <div class="space-y-6">
+              {% if page.sidebar_first %}
+                <div class="card">
+                  <h3 class="text-lg font-semibold text-slate-900 mb-2">{{ 'Sidebar'|t }}</h3>
+                  {{ page.sidebar_first }}
+                </div>
+              {% endif %}
+              {% if page.sidebar_second %}
+                <div class="card">
+                  <h3 class="text-lg font-semibold text-slate-900 mb-2">{{ 'Additional'|t }}</h3>
+                  {{ page.sidebar_second }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {% if page.footer %}
+    <footer class="border-t border-slate-200 bg-white">
+      <div class="page-shell py-8 text-sm text-slate-600 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="font-semibold text-slate-800">{{ 'Footer'|t }}</div>
+        <div class="flex flex-wrap gap-4">
+          {{ page.footer }}
+        </div>
+      </div>
+    </footer>
+  {% endif %}
+</div>
